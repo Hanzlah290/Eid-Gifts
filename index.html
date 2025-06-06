@@ -18,6 +18,22 @@
     text-align: center;
   }
 
+  body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(103, 247, 122); /* Adjust darkness here (0.5 = 50% dark) */
+  z-index: -2;
+}
+
+body {
+  position: relative;
+  z-index: 0;
+}
+
+
   /* Added missing dot selector */
   .floating-shapes {
     display: flex;
@@ -55,7 +71,7 @@
   }
 
   .container {
-  background-color: rgba(0, 100, 0, 0.7);
+  background-color: rgb(8, 67, 42);
   padding: 2rem;
   margin: 2rem auto;
   width: 90%;
