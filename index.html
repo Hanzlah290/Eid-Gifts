@@ -1,178 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eid ul Azha Gifts</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('https://w0.peakpx.com/wallpaper/991/943/HD-wallpaper-eid-mubarak-eid-mubarak-eid.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #fff;
-      text-align: center;
+ <style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('https://w0.peakpx.com/wallpaper/991/943/HD-wallpaper-eid-mubarak-eid-mubarak-eid.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f4f78d;
+    text-align: center;
+  }
+
+  /* Added missing dot selector */
+  .floating-shapes {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* spacing between moon rows */
+    margin-top: 10px; /* space between container and moons */
+    justify-content: center;
+    width: 100%; /* same width as container */
+  }
+
+  .moon-row {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    animation: waveMove 5s ease-in-out infinite;
+    animation-delay: calc(var(--row) * 1.5s);
+    margin: 15px 0;  /* add vertical margin to separate rows */
+  }
+
+  .moon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 25% 50%, var(--color, #FFD700) 50%, transparent 51%),
+                radial-gradient(circle at 50% 50%, transparent 60%, var(--color, #004d00) 61%);
+    border-radius: 50%;
+    opacity: 0.6;
+    margin: 0 10px;
+  }
+
+  /* Wave vertical movement */
+  @keyframes waveMove {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(15px); }
+  }
+
+  .container {
+  background-color: rgba(0, 100, 0, 0.7);
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px 2px gold; /* softer glow */
+}
+
+h1, p {
+  text-shadow: 0 0 4px #FFD700; /* subtle text glow */
+}
+
+  input, button {
+    padding: 14px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    width: 90%;
+    max-width: 300px;
+    display: block;
+  }
+
+ button {
+  background-color: gold;
+  color: #004d00;
+  font-weight: bold;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0 0 8px 3px gold; /* softer hover glow */
+}
+
+  .basket {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 15px;
+    color: #004d00;
+    font-size: 1.1rem;
+    display: none;
+    position: relative;
+    margin-top: 10px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+  }
+
+  .basket-icon {
+    display: none;
+  margin-top: 20px;
+  width: 100px;
+  max-width: 40%;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+  box-shadow: none; /* toned down glow */
+}
+.basket-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px gold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(5px, 0); }
+    50% { transform: translate(-5px, 0); }
+    75% { transform: translate(5px, 0); }
+    100% { transform: translate(0, 0); }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 1.2rem;
+      margin: 1rem auto;
     }
 
-    .container {
-      background-color: rgba(0, 100, 0, 0.7);
-      padding: 2rem;
-      margin: 2rem auto;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px 3px gold;
-      position: relative;
+    h1 {
+      font-size: 1.5rem;
     }
 
     input, button {
-      padding: 14px;
-      margin: 10px auto;
-      border-radius: 10px;
-      border: none;
       font-size: 1rem;
-      width: 90%;
-      max-width: 300px;
-      display: block;
-    }
-
-    button {
-      background-color: gold;
-      color: #004d00;
-      font-weight: bold;
-      cursor: pointer;
+      padding: 12px;
     }
 
     .basket {
-      padding: 1rem;
-      background-color: #fff;
-      border-radius: 15px;
-      color: #004d00;
-      font-size: 1.1rem;
-      display: none;
-      position: relative;
-      margin-top: 10px;
-      width: 90%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      margin-left: auto;
-      margin-right: auto;
-      word-wrap: break-word;
+      font-size: 1rem;
     }
+  }
+</style>
 
-    .basket-icon {
-      margin-top: 20px;
-      width: 100px;
-      max-width: 40%;
-      cursor: pointer;
-      transition: transform 0.1s ease-in-out;
-      display: none;
-    }
-
-    .shake {
-      animation: shake 0.5s;
-    }
-
-    @keyframes shake {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(5px, 0); }
-      50% { transform: translate(-5px, 0); }
-      75% { transform: translate(5px, 0); }
-      100% { transform: translate(0, 0); }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 1.2rem;
-        margin: 1rem auto;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      input, button {
-        font-size: 1rem;
-        padding: 12px;
-      }
-
-      .basket {
-        font-size: 1rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🕌 Eid ul Azha Basket! </h1>
-    <p>Enter your name and password to open your gift basket!</p>
-    <input type="text" id="name" placeholder="Your Name" />
-    <input type="password" id="password" placeholder="Password" />
-    <br />
-    <button onclick="checkBasket()">Open Basket</button>
-    <br />
-    <img id="basketImage" class="basket-icon" src="basket.webp" alt="Gift Basket" onclick="revealGift()" />
-    <div id="basket" class="basket"></div>
+ <div class="container">
+  <h1>🕌 Eid ul Azha Basket! </h1>
+  <p>Enter your name and password to open your gift basket!</p>
+  <input type="text" id="name" placeholder="Your Name" />
+  <input type="password" id="password" placeholder="Password" />
+  <br />
+  <button onclick="checkBasket()">Open Basket</button>
+  <br />
+  <img id="basketImage" class="basket-icon" src="basket.webp" alt="Gift Basket" onclick="revealGift()" />
+  <p id="clickInstruction" style = "display: none;">
+  Click the basket to open your gift!
+  </p>
+
+  <div id="basket" class="basket"></div>
+</div>
+<div class="floating-shapes">
+    <!-- moon rows here as before -->
+    <div class="moon-row" style="--row:0; --color: #FFD700;">
+      <div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div>
+    </div>
+    <div class="moon-row" style="--row:1; --color: #228B22;">
+      <div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div>
+    </div>
+    <div class="moon-row" style="--row:2; --color: #FFFFFF;">
+      <div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div><div class="moon"></div>
+    </div>
   </div>
 
   <script>
-   const baskets = {
-  "Aman": { password: "aman01", gift: "🌟 Eid Mubarak Aman! Your smile is a gift to us all!" },
-  "Ureen": { password: "ureen26", gift: "🌟 Ureen, aaj ghussa kam kr de pehn, aur pichla bhi bhula de ghussa 😂, Eid Mubarik !" },
-  "Isba": { password: "isba02", gift: "🌙 Isba, wishing you a joyful Eid with all your dreams fulfilled!" },
-  "Hania": { password: "hania03", gift: "🐐 Hania, Eid Mubarik, bartan dho dein khany keh" },
-  "Hafsa": { password: "hafsa04", gift: "🎁 Hafsa, Eid Mubarak! Have a great Eid" },
-  "Habiba": { password: "habiba05", gift: "💖 Habiba, you will allways be precious. Hope you have the best Eid!" },
-  "Laiba": { password: "laiba06", gift: "🕊️ Laiba, may this Eid bring peace, joy, and endless blessings to you!" },
-  "Rafay Bhatti": { password: "rafayb07", gift: "⭐ Eid Mubarik, Bhatti sab !" },
-  "Tayyaba": { password: "tayyaba08", gift: "⭐ Eid Mubarik Tayyaba!, may this be you best Eid ever" },
-  "Aiman": { password: "aiman09", gift: "⭐ Aiman, Happy to have friends like you, Eid Mubarik!" },
-  "Summer": { password: "summer10", gift: "⭐ Summer, Happy to have friends like you, Eid Mubarik!" },
-  "Haneea": { password: "haneea11", gift: "⭐ Hanoo, Hope you have all your wishes fullfilled this Eid, Cutie!" },
-  "Esha": { password: "esha12", gift: "⭐ Esha, Blessed to have czns like you, Eid Mubarik!" },
-  "Amna": { password: "amna13", gift: "⭐ Maina Baji, Blessed to have czns like you, wish we czns could spend more time together, Eid Mubarik!" },
-  "Eman": { password: "eman14", gift: "⭐ Mano,Esha, Blessed to have czns like you, Eid Mubarik!!" },
-  "Hareem": { password: "hareem15", gift: "⭐ Hareem Baji, Blessed to have czns like you, Eid Mubarik! & advance Shadi Mubarik, dubara website nhi bnai jai gi mujh sa 😢" },
-  "Fouzia": { password: "fouzia16", gift: "⭐ Mam, Eid Mubarik, blessed to have you as my teacher, remember me in your prayers! 😊" },
-  "Uswah": { password: "uswah17", gift: "⭐ Uswah Uswah Uswah, Eid Mubarik!, aur kya tareefain kron tumhari, time kam ha 😂, but thanks for being besides me" },
-  "Manal": { password: "manal18", gift: "⭐ Manal Baji, Blessed to have czns like you, Eid Mubarik!!" },
-  "Sonia": { password: "sonia19", gift: "⭐ Mam, Eid Mubarik!, wish I could spend more time with my favourite teacher next semester" },
-  "Eman": { password: "eman20", gift: "⭐ Eman (JBL), yeh na soochna summer aaya ha to bhol gaya hon, Eid Mubarik Mano!" },
-  "Hisham": { password: "hisham21", gift: "⭐ Eid Mubarik!, mehnga kida aa dangar" },
-  "Ikrimah": { password: "ikrimah22", gift: "⭐ Eid Mubarik! Mufti sab, Beopari, Czn, Hafuz, Wada L*** " },
-  "Qasim": { password: "qasim23", gift: "⭐ Eid Mubarik Malik G!" },
-  "Daud": { password: "daoud24", gift: "⭐ Eid Mubarik Doodie, Brothers from another Mother!" },
-  "Rafay Mirza": { password: "rafaym25", gift: "⭐ Eid Mubarik Rafay!, Is Summer kya krna ha, DSA ?" }
-};
+  const baskets = {
+    "aman": { password: "aman01", gift: "🌟 Eid Mubarak Aman! Your smile is a gift to us all!, missing you this Eid" },
+    "ureen": { password: "ureen26", gift: "🌟 Ureen, aaj ghussa kam kr de pehn, aur pichla bhi bhula de ghussa 😂, Eid Mubarik !" },
+    "isba": { password: "isba02", gift: "🌙 Isba, wishing you a joyful Eid with all your dreams fulfilled!" },
+    "hania": { password: "hania03", gift: "🐐 Hania, Eid Mubarik, bartan dho dein khany keh" },
+    "hafsa": { password: "hafsa04", gift: "🎁 Hafsa, Eid Mubarak! Have a great Eid" },
+    "habiba": { password: "habiba05", gift: "💖 Habiba, you will allways be precious. Hope you have the best Eid!" },
+    "laiba": { password: "laiba06", gift: "🕊️ Laiba, may this Eid bring peace, joy, and endless blessings to you!" },
+    "rafay bhatti": { password: "rafayb07", gift: "⭐ Eid Mubarik, Bhatti sab !" },
+    "tayyaba": { password: "tayyaba08", gift: "⭐ Eid Mubarik Tayyaba!, may this be you best Eid ever" },
+    "aiman": { password: "aiman09", gift: "⭐ Aiman, Happy to have friends like you, Eid Mubarik!" },
+    "summer": { password: "summer10", gift: "⭐ Summer, Happy to have friends like you, Eid Mubarik!" },
+    "haneea": { password: "haneea11", gift: "⭐ Hanoo, Hope you have all your wishes fullfilled this Eid, Cutie!" },
+    "esha": { password: "esha12", gift: "⭐ Esha, Blessed to have czns like you, Eid Mubarik!" },
+    "amna": { password: "amna13", gift: "⭐ Maina Baji, Blessed to have czns like you, wish we czns could spend more time together, Eid Mubarik!" },
+    "eman": { password: "eman14", gift: "⭐ Mano, Blessed to have czns like you, Eid Mubarik!!" },
+    "hareem": { password: "hareem15", gift: "⭐ Hareem Baji, Blessed to have czns like you, Eid Mubarik! & advance Shadi Mubarik, dubara website nhi bnai jai gi mujh sa 😢" },
+    "fouzia": { password: "fouzia16", gift: "⭐ Mam, Eid Mubarik, blessed to have you as my teacher, remember me in your prayers! 😊" },
+    "uswah": { password: "uswah17", gift: "⭐ Uswah Uswah Uswah, Eid Mubarik!, aur kya tareefain kron tumhari, time kam ha 😂, but thanks for being besides me" },
+    "manal": { password: "manal18", gift: "⭐ Manal Baji, Blessed to have czns like you, Eid Mubarik!!" },
+    "sonia": { password: "sonia19", gift: "⭐ Mam, Eid Mubarik!, wish I could spend more time with my favourite teacher next semester" },
+    "eman mehmood": { password: "eman20", gift: "⭐ Eman (JBL), yeh na soochna summer aaya ha to bhol gaya hon, Eid Mubarik Mano!" },
+    "hisham": { password: "hisham21", gift: "⭐ Eid Mubarik!, mehnga kida aa dangar" },
+    "ikrimah": { password: "ikrimah22", gift: "⭐ Eid Mubarik! Mufti sab, Beopari, Czn, Hafuz, Wada L*** " },
+    "qasim": { password: "qasim23", gift: "⭐ Eid Mubarik Malik G!" },
+    "daud": { password: "daoud24", gift: "⭐ Eid Mubarik Doodie, Brothers from another Mother!" },
+    "rafay Mirza": { password: "rafaym25", gift: "⭐ Eid Mubarik Rafay!, Is Summer kya krna ha, DSA ?" }
+  };
 
+  function checkBasket() {
+    const nameInput = document.getElementById("name");
+    const passwordInput = document.getElementById("password");
+    const name = nameInput.value.trim();
+    const password = passwordInput.value.trim();
+    const basketImg = document.getElementById("basketImage");
+    const basketDiv = document.getElementById("basket");
+    const instruction = document.getElementById("clickInstruction");
 
-    function checkBasket() {
-      const name = document.getElementById("name").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const basketImg = document.getElementById("basketImage");
-      const basketDiv = document.getElementById("basket");
+    // Find the actual key in baskets that matches input name (case-insensitive)
+    const user = Object.keys(baskets).find(
+      key => key.toLowerCase() === name.toLowerCase()
+    );
 
-      if (baskets[name] && baskets[name].password === password) {
-        basketImg.style.display = "inline-block";
-        basketDiv.style.display = "none";
-        basketDiv.textContent = baskets[name].gift;
-      } else {
-        basketDiv.textContent = "❌ Name or password incorrect. Try again.";
-        basketDiv.style.display = "block";
-        basketImg.style.display = "none";
-      }
+    if (user && baskets[user].password === password) {
+      basketImg.style.display = "inline-block";
+      instruction.style.display = "block"; // Show instruction
+      basketDiv.style.display = "none";
+      basketDiv.textContent = baskets[user].gift;
+
+      // Clear inputs
+      nameInput.value = "";
+      passwordInput.value = "";
+
+      // Remove error highlight if any
+      nameInput.style.border = "";
+      passwordInput.style.border = "";
+    } else {
+      basketDiv.textContent = "❌ Name or password incorrect. Try again.";
+      basketDiv.style.display = "block";
+      basketImg.style.display = "none";
+      instruction.style.display = "none"; // Hide instruction on error
+
+      // Highlight input fields with red border
+      nameInput.style.border = "2px solid red";
+      passwordInput.style.border = "2px solid red";
     }
+  }
 
-    function revealGift() {
-      const basketImg = document.getElementById("basketImage");
-      basketImg.classList.add("shake");
-      setTimeout(() => {
-        basketImg.classList.remove("shake");
-        document.getElementById("basket").style.display = "block";
-      }, 500);
+  function revealGift() {
+    const basketImg = document.getElementById("basketImage");
+    basketImg.classList.add("shake");
+    setTimeout(() => {
+      basketImg.classList.remove("shake");
+      document.getElementById("basket").style.display = "block";
+    }, 500);
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+
+  // Add Enter key event listener to input fields
+  document.getElementById("name").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkBasket();
     }
-  </script>
+  });
+
+  document.getElementById("password").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkBasket();
+    }
+  });
+</script>
+
 </body>
 </html>
