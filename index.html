@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eid ul Azha Gifts</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://w0.peakpx.com/wallpaper/991/943/HD-wallpaper-eid-mubarak-eid-mubarak-eid.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(0, 100, 0, 0.7);
+      padding: 2rem;
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px 3px gold;
+      position: relative;
+    }
+
+    input, button {
+      padding: 14px;
+      margin: 10px auto;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      width: 90%;
+      max-width: 300px;
+      display: block;
+    }
+
+    button {
+      background-color: gold;
+      color: #004d00;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .basket {
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 15px;
+      color: #004d00;
+      font-size: 1.1rem;
+      display: none;
+      position: relative;
+      margin-top: 10px;
+      width: 90%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      margin-left: auto;
+      margin-right: auto;
+      word-wrap: break-word;
+    }
+
+    .basket-icon {
+      margin-top: 20px;
+      width: 100px;
+      max-width: 40%;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out;
+      display: none;
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(5px, 0); }
+      50% { transform: translate(-5px, 0); }
+      75% { transform: translate(5px, 0); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1.2rem;
+        margin: 1rem auto;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      input, button {
+        font-size: 1rem;
+        padding: 12px;
+      }
+
+      .basket {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🕌 Eid ul Azha Basket! </h1>
+    <p>Enter your name and password to open your gift basket!</p>
+    <input type="text" id="name" placeholder="Your Name" />
+    <input type="password" id="password" placeholder="Password" />
+    <br />
+    <button onclick="checkBasket()">Open Basket</button>
+    <br />
+    <img id="basketImage" class="basket-icon" src="basket.webp" alt="Gift Basket" onclick="revealGift()" />
+    <div id="basket" class="basket"></div>
+  </div>
+
+  <script>
+   const baskets = {
+  "Aman": { password: "123", gift: "🌟 Eid Mubarak Aman! Your smile is a gift to us all!" },
+  "Isba": { password: "123", gift: "🌙 Isba, wishing you a joyful Eid with all your dreams fulfilled!" },
+  "Hania": { password: "123", gift: "🐐 Hania, may your Eid be full of blessings and love!" },
+  "Hafsa": { password: "123", gift: "🎁 Hafsa, Eid Mubarak! You're as special as this gift!" },
+  "Habiba": { password: "123", gift: "💖 Habiba, your friendship is the most precious Eid gift!" },
+  "Laiba": { password: "123", gift: "🕊️ Laiba, may this Eid bring peace, joy, and endless blessings to you!" },
+  "Abeer": { password: "123", gift: "🌸 Abeer, you're a flower blooming bright this Eid!" },
+  "Ureen": { password: "123", gift: "⭐ Ureen, your light brightens Eid like the full moon!" }
+};
+
+
+    function checkBasket() {
+      const name = document.getElementById("name").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const basketImg = document.getElementById("basketImage");
+      const basketDiv = document.getElementById("basket");
+
+      if (baskets[name] && baskets[name].password === password) {
+        basketImg.style.display = "inline-block";
+        basketDiv.style.display = "none";
+        basketDiv.textContent = baskets[name].gift;
+      } else {
+        basketDiv.textContent = "❌ Name or password incorrect. Try again.";
+        basketDiv.style.display = "block";
+        basketImg.style.display = "none";
+      }
+    }
+
+    function revealGift() {
+      const basketImg = document.getElementById("basketImage");
+      basketImg.classList.add("shake");
+      setTimeout(() => {
+        basketImg.classList.remove("shake");
+        document.getElementById("basket").style.display = "block";
+      }, 500);
+    }
+  </script>
+</body>
+</html>
